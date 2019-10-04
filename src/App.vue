@@ -37,19 +37,9 @@
         ></b-form-input>
       </b-form-group>
       <b-button @click="submitForm" size="large" variant="primary">Cadastrar</b-button>
-      
     </b-card>
     <hr />
-    <Users :user="this.dados" />
-    <b-list-group>
-      <b-list-group-item v-for="(cliente, id) in dados" :key="id">
-        <strong>Nome: {{cliente.usuario}}</strong>
-        <br />
-        <p>Email: {{cliente.email}}</p>
-        <p>Idade: {{cliente.idade}}</p>
-        <p>Profissão: {{cliente.profissao}}</p>
-      </b-list-group-item>
-    </b-list-group>
+    <Users />
   </div>
 </template>
 
@@ -66,8 +56,7 @@ export default {
         idade: null,
         profissao: "",
         email: ""
-      },
-      dados: []
+      }
     };
   },
   methods: {
@@ -79,21 +68,15 @@ export default {
         this.cliente.profissao = "";
         this.cliente.email = "";
       });
-      this.fetchData();
-    },
-    fetchData() {
-      this.$http.get("usuarios.json").then(res => {
-        this.dados = res.data;
-        console.log(this.dados);
-      });
     }
-  },
-  created() {
-    this.fetchData();
-  },
-  updated() {
-    this.fetchData();
   }
+
+  // Método updated foi removido pq embora ele atualizasse em tempo real os clientes que foram cadastrados, causava a página multiplos re-renders
+  // e se notar na aba de Network do console do chrome, poderíamos ver que ele de fato fazia infinitas requisições ao servidor, causando sobrecarga
+
+  // updated() {
+  //   this.fetchData();
+  // }
 };
 </script>
 
