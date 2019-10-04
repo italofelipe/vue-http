@@ -1,4 +1,4 @@
-# rest-http
+# http-exercicios
 
 ## Project setup
 ```
